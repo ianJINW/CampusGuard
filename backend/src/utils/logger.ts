@@ -1,7 +1,7 @@
 import { createLogger, format, transports } from 'winston';
 import { logger } from 'express-winston'
 
-const winstonLogger = createLogger({
+const logging = createLogger({
   level: process.env.NODE_ENV === 'production' ? 'info' : 'debug',
   format: format.combine(
     format.timestamp(),
@@ -18,11 +18,11 @@ const winstonLogger = createLogger({
 
 
 export const logs = logger({
-  winstonInstance: winstonLogger,
+  winstonInstance: logging,
   meta: false,
   msg: "HTTP {{req.method}} {{req.url}}",
   expressFormat: true
 })
 
 
-export default winstonLogger
+export default logging
